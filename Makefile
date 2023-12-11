@@ -37,6 +37,7 @@ exec_prefix = $(prefix)
 bindir = $(exec_prefix)/bin
 includedir = $(prefix)/include
 libdir = $(prefix)/lib
+devdir = $(prefix)/dev/lib
 mandir = $(prefix)/man
 
 all:	$(ALL)
@@ -92,12 +93,12 @@ install:	$(ALL)
 	install -m 0644 pigpiod_if.h                   $(DESTDIR)$(includedir)
 	install -m 0644 pigpiod_if2.h                  $(DESTDIR)$(includedir)
 	install -m 0755 -d                             $(DESTDIR)$(libdir)
-	install -m 0755 libpigpio.so.$(SOVERSION)      $(DESTDIR)$(libdir)
-	install -m 0755 libpigpiod_if.so.$(SOVERSION)  $(DESTDIR)$(libdir)
-	install -m 0755 libpigpiod_if2.so.$(SOVERSION) $(DESTDIR)$(libdir)
-	cd $(DESTDIR)$(libdir) && ln -fs libpigpio.so.$(SOVERSION)      libpigpio.so
-	cd $(DESTDIR)$(libdir) && ln -fs libpigpiod_if.so.$(SOVERSION)  libpigpiod_if.so
-	cd $(DESTDIR)$(libdir) && ln -fs libpigpiod_if2.so.$(SOVERSION) libpigpiod_if2.so
+	install -m 0755 libpigpio.so.$(SOVERSION)      $(DESTDIR)$(devdir)
+	install -m 0755 libpigpiod_if.so.$(SOVERSION)  $(DESTDIR)$(devdir)
+	install -m 0755 libpigpiod_if2.so.$(SOVERSION) $(DESTDIR)$(devdir)
+	cd $(DESTDIR)$(devdir) && ln -fs libpigpio.so.$(SOVERSION)      libpigpio.so
+	cd $(DESTDIR)$(devdir) && ln -fs libpigpiod_if.so.$(SOVERSION)  libpigpiod_if.so
+	cd $(DESTDIR)$(devdir) && ln -fs libpigpiod_if2.so.$(SOVERSION) libpigpiod_if2.so
 	install -m 0755 -d                             $(DESTDIR)$(bindir)
 	install -m 0755 pig2vcd                        $(DESTDIR)$(bindir)
 	install -m 0755 pigpiod                        $(DESTDIR)$(bindir)
@@ -116,12 +117,12 @@ uninstall:
 	rm -f $(DESTDIR)$(includedir)/pigpio.h
 	rm -f $(DESTDIR)$(includedir)/pigpiod_if.h
 	rm -f $(DESTDIR)$(includedir)/pigpiod_if2.h
-	rm -f $(DESTDIR)$(libdir)/libpigpio.so
-	rm -f $(DESTDIR)$(libdir)/libpigpiod_if.so
-	rm -f $(DESTDIR)$(libdir)/libpigpiod_if2.so
-	rm -f $(DESTDIR)$(libdir)/libpigpio.so.$(SOVERSION)
-	rm -f $(DESTDIR)$(libdir)/libpigpiod_if.so.$(SOVERSION)
-	rm -f $(DESTDIR)$(libdir)/libpigpiod_if2.so.$(SOVERSION)
+	rm -f $(DESTDIR)$(devdir)/libpigpio.so
+	rm -f $(DESTDIR)$(devdir)/libpigpiod_if.so
+	rm -f $(DESTDIR)$(devdir)/libpigpiod_if2.so
+	rm -f $(DESTDIR)$(devdir)/libpigpio.so.$(SOVERSION)
+	rm -f $(DESTDIR)$(devdir)/libpigpiod_if.so.$(SOVERSION)
+	rm -f $(DESTDIR)$(devdir)/libpigpiod_if2.so.$(SOVERSION)
 	rm -f $(DESTDIR)$(bindir)/pig2vcd
 	rm -f $(DESTDIR)$(bindir)/pigpiod
 	rm -f $(DESTDIR)$(bindir)/pigs
